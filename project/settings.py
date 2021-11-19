@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+import django_on_heroku
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,21 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-kwwq%&r!i=65vlksskiad06lokw2bl=*ny+ccxmar4y)o)c^z1'
+DEBUG = os.environ.get('DEBUG_VALUE')
+print(DEBUG)
 
+if DEBUG:
+    SECRET_KEY = 'django-insecure-kwwq%&r!i=65vlksskiad06lokw2bl=*ny+ccxmar4y)o)c^z1'
+else:
+    SECRET_KEY = os.environ.get('DJANGO_PROJECT_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.2.108',
+                'https://cars-apis.herokuapp.com/',
+                'cars-apis.herokuapp.com/',
+                '127.0.0.1',
+                 ]
 
 
 # Application definition
@@ -37,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cars_api',
 ]
 
 MIDDLEWARE = [
@@ -118,8 +130,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+django_on_heroku.settings(locals())
