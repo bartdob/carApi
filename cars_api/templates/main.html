@@ -28,9 +28,9 @@
         <div class="container" id="box" style="width: 300px;">
             <h2> {{ car.make }}</h2>
             <h2>{{ car.model }}</h2>
-            <h2>Rank: {{car.rank}}</h2>
+            <h2>Rank: {{car.review.rate}}</h2>
             <div class="delete">
-                <a style="text-decoration: none; color: black;" href="{% url 'delete_car' car.model %}">
+                <a style="text-decoration: none; color: black;" href="{% url 'delete_car' car.id %}">
                     delete
                 </a>
 

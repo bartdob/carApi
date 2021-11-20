@@ -19,7 +19,9 @@ def index():
 
     res = requests.get(url, params=payload)
 
-    print(r['SearchCriteria'])
+    print(r)
+
+    print(r['Results'][0]['Make_Name'])
 
     model1 = r['Results'][0]['Model_Name']
     print(model1)
@@ -34,25 +36,12 @@ def index():
 
 index()
 
+
 def random_string():
     return str(random.randint(1, 5))
 
 
 print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
-print(random_string())
+
 
 
